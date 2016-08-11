@@ -1,7 +1,6 @@
-# This Repository Has Moved
+Experimental Packages for MoveIt!
+=================================
 
-The new location as of August 5th, 2016 is [https://github.com/ros-planning/moveit](https://github.com/ros-planning/moveit)
-
-See [migration notes](https://github.com/davetcoleman/moveit_merge/blob/master/README.md) for more details.
-
-Please do not open new pull requests or issues in this old location.
+This repository includes possibly broken/unmaintained/unfinished libraries that are being worked on or have been worked on in the past.
+They are not part of MoveIt! officially.
+No support is offered for code in this repository, but you are welcome to use it if you see fit.
