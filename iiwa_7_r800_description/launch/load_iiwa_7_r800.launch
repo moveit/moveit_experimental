@@ -1,0 +1,5 @@
+<launch>
+  <!-- Load URDF -->
+  <param name="robot_description"
+     command="$(find xacro)/xacro.py '$(find iiwa_7_r800_description)/urdf/iiwa_7_r800.xacro'" />
+</launch>
