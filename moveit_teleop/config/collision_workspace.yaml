@@ -1,0 +1,7 @@
+# Workspace of robot
+collision_workspace:
+  object1_dimensions_6: [0.38, 0.61, 0.1, -0.38, -0.61, -0.5] # collision table
+  object2_dimensions_6: [-0.60, 0.55, 0.1, -0.61, -0.55, 1.0] # collision screen
+  object3_dimensions_6: [-0.35, 0.55, 0.0, -0.61, -0.55, 0.2] # collision table2
+# Note that to add more, you need to also add C++ code to include/moveit_teleop/collision_workspace.h
+# TODO: make it load as many objects as you list here automatically

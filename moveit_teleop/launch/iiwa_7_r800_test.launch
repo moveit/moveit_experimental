@@ -1,0 +1,13 @@
+<launch>
+
+  <!-- GDB functionality -->
+  <arg name="debug" default="false" />
+
+  <include file="$(find moveit_teleop)/launch/iiwa_7_r800_teleop.launch">
+    <arg name="debug" default="$(arg debug)"/>
+    <arg name="play_traj" default="1"/>
+  </include>
+
+  <include file="$(find iiwa_7_r800_control)/launch/iiwa_7_r800_log_controller.launch"/>
+
+</launch>
