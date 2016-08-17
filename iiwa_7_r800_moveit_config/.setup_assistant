@@ -1,0 +1,8 @@
+moveit_setup_assistant_config:
+  URDF:
+    package: iiwa_7_r800_description
+    relative_path: urdf/iiwa_7_r800.xacro
+  SRDF:
+    relative_path: config/iiwa_7_r800.srdf
+  CONFIG:
+    generated_timestamp: 1446086540

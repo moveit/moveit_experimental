@@ -1,0 +1,16 @@
+#controller_manager_ns: moveit_simple_controller_manager
+ros_control_namespace: iiwa_7_r800
+controller_list:
+# Arm controller
+  - name: /iiwa_7_r800/reflexxes_trajectory_controller
+    action_ns: follow_joint_trajectory
+    type: FollowJointTrajectory
+    default: true
+    joints:
+      - joint_a1
+      - joint_a2
+      - joint_a3
+      - joint_a4
+      - joint_a5
+      - joint_a6
+      - joint_a7
