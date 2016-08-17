@@ -1,0 +1,4 @@
+<launch>
+  <rosparam command="load" ns="test" file="$(find cartesian_controller)/test/tolerances.yaml" />
+  <test test-name="tolerances_test" pkg="cartesian_controller" type="tolerances_test"/>
+</launch>

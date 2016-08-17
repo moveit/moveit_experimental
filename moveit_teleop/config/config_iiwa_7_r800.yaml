@@ -1,0 +1,50 @@
+# Main functionality of this node
+teleoperation:
+  visualization_rate: 30 # hz
+  waypoints_file: /home/dave/ros/current/ws_iiwa/src/iiwa_7_r800/moveit_teleop/resources/benchmark_trajectory1.csv
+  #waypoints_file: /home/dave/ros/current/ws_iiwa/src/iiwa_7_r800/moveit_teleop/resources/benchmark_trajectory2_simple.csv
+  #waypoints_file: /home/dave/ros/current/ws_iiwa/src/iiwa_7_r800/moveit_teleop/resources/benchmark_trajectory3_complex.csv
+  #waypoints_file: /home/dave/ros/current/ws_iiwa/src/iiwa_7_r800/moveit_teleop/resources/benchmark_trajectory4_bow.csv
+  #waypoints_file: /home/dave/ros/current/ws_iiwa/src/iiwa_7_r800/moveit_teleop/resources/benchmark_trajectory5_single_traj.csv
+  #waypoints_file: /home/dave/ros/current/ws_iiwa/src/iiwa_7_r800/moveit_teleop/resources/benchmark_trajectory6_segmented_line.csv
+  #waypoints_file: /home/dave/ros/current/ws_iiwa/src/iiwa_7_r800/moveit_teleop/resources/benchmark_trajectory7_fast_collision.csv
+  waypoints_loop: true # playback continously
+  debug:
+    output_start_pose: false # print to command line the pose of the robot when the application starts
+    show_joint_limits: false # print to command line the joints and their closeness to limits (useful visualization)
+
+# Interface with various input sources
+remote_control:
+  rviz_dashboard_topic: /moveit_rviz_dashboard
+  game_controller_topic: /joy
+  pose_msg_topic: /vive_vr/pose_stamped
+  imarker_topic: /moveit_teleop/interactive_marker
+  imarker_robot_link: link_7 # name of URDF link to display for interactive marker
+  #imarker_offset: [0.0, 0.0, -0.1, 0, 0, 0] # x,y,z,r,p,y - where the interactive marker should be visualized on the end of the robot arm
+  imarker_offset: [0.0, 0.0, 0.0, 0, 0, 0] # x,y,z,r,p,y - where the interactive marker should be visualized on the end of the robot arm
+  game_controller_speed: 0.005 # how much a button press on the game controller translates the robot
+  game_controller_rotation_speed: 0.02 # how much a button press on the game controller rotates the robot
+
+# Interface for publishing joint/cartesian commands to the low level controllers
+execution_interface:
+  command_mode: joint_publisher # method for publishing commands from this node to low level controller
+  cartesian_command_topic: /iiwa_7_r800/cartesian_controller/cartesian_command # command output from this node
+  joint_trajectory_topic: /iiwa_7_r800/cartesian_controller/command # command output from this node
+  save_traj_to_file: false # debug mode for creating a CSV for use with Matlab
+  save_traj_to_file_path: /home/dave/ros/current/ws_iiwa/src/iiwa_trajectory_data/ # debug
+  visualize_trajectory_line: false # show in RViz a series of markers visualizing path
+  visualize_trajectory_path: false # show in RViz the robot moving on the trajectory path
+  check_for_waypoint_jumps: false # ensure that any trajectory that is published does not have huge discontinuties in joint space
+
+# MoveIt Boilerplate Base Functionality
+boilerplate:
+  robot_description: /iiwa_7_r800/robot_description
+  joint_state_topic: /iiwa_7_r800/joint_states # location to recieve updates of the robot's pose
+  arm_joint_model_group: arm # the main planning group to control
+  planning_scene_topic: /iiwa/planning_scene  # topic for communicating the collision obj in the env with other nodes
+  planning_scene_name: iiwa_planning_scene
+
+# Currently this is not utilized
+debug_interface:
+  autonomous: true
+  full_autonomous: true

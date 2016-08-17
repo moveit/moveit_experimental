@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<RoboticsAPIData version="3">
+    <world>
+        <gravitation x="0.0" y="0.0" z="9.81"/>
+        <frame name="P1">
+            <transformation a="0.0" b="0.0" c="0.0" x="0.0" y="0.0" z="0.0"/>
+            <additionalInformation>
+                <info key="LastModificationTime" type="java.lang.Long" value="1440438910192"/>
+            </additionalInformation>
+        </frame>
+    </world>
+    <objectTemplates>
+        <toolTemplate class="" defaultMotionFrameRef="" name="Gripper">
+            <frames>
+                <frame name="SafetySphere">
+                    <transformation a="0.0" b="0.0" c="0.0" x="0.0" y="0.0" z="100.0"/>
+                    <additionalInformation>
+                        <info key="Radius" type="java.lang.Integer" value="100"/>
+                    </additionalInformation>
+                </frame>
+                <frame name="GraspPoint">
+                    <transformation a="0.0" b="0.0" c="0.0" x="0.0" y="0.0" z="150.0"/>
+                </frame>
+            </frames>
+            <loadData cogA="0.0" cogB="0.0" cogC="0.0" cogX="0.0" cogY="0.0" cogZ="60.0" inertiaX="0.0" inertiaY="0.0" inertiaZ="0.0" mass="0.0"/>
+        </toolTemplate>
+        <toolTemplate class="" defaultMotionFrameRef="" name="VersaBallSmall">
+            <frames>
+                <frame name="Tip">
+                    <transformation a="0.0" b="0.0" c="0.0" x="0.0" y="0.0" z="180.0"/>
+                </frame>
+                <frame name="SafetySphere">
+                    <transformation a="0.0" b="0.0" c="0.0" x="0.0" y="0.0" z="60.0"/>
+                    <additionalInformation>
+                        <info key="Radius" type="java.lang.Integer" value="60"/>
+                        <info key="SafetyID" type="java.lang.Integer" value="0"/>
+                    </additionalInformation>
+                </frame>
+            </frames>
+            <additionalInformation>
+                <info key="SafetyID" type="java.lang.Integer" value="0"/>
+            </additionalInformation>
+            <loadData cogA="0.0" cogB="0.0" cogC="0.0" cogX="0.0" cogY="1.4629503343672519" cogZ="93.8620787196053" inertiaX="0.0" inertiaY="0.0" inertiaZ="0.0" mass="2.910501445254268"/>
+        </toolTemplate>
+    </objectTemplates>
+    <processDataContainer>
+        <processData comment="" dataType="java.lang.Double" defaultValue="50.0" displayName="Joint Impedance" id="jointImpedance" max="300.0" min="0.0" unit="Nm/rad" value="50"/>
+        <processData comment="" dataType="java.lang.Integer" defaultValue="0" displayName="FRI.DebugLevel" id="FRIDebugLevel" max="65535.0" min="0.0" unit="" value="65535"/>
+    </processDataContainer>
+</RoboticsAPIData>

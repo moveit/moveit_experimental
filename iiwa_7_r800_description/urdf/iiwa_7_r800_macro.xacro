@@ -1,0 +1,230 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+  <property name="soft_limit" value= "0.01" />
+  <property name="k_position" value= "100" />
+  <property name="limit_padding" value= "0.1" />
+  <xacro:macro name="kuka_iiwa_7_r800" params="prefix">
+    <!-- link list -->
+    <link name="${prefix}base_link">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://iiwa_7_r800_description/meshes/iiwa_7_r800/visual/base_link.dae" />
+        </geometry>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://iiwa_7_r800_description/meshes/iiwa_7_r800/collision/base_link.stl" />
+        </geometry>
+      </collision>
+    </link>
+    <link name="${prefix}link_1">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://iiwa_7_r800_description/meshes/iiwa_7_r800/visual/link_1.dae" />
+        </geometry>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://iiwa_7_r800_description/meshes/iiwa_7_r800/collision/link_1.stl" />
+        </geometry>
+      </collision>
+    </link>
+    <link name="${prefix}link_2">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://iiwa_7_r800_description/meshes/iiwa_7_r800/visual/link_2.dae" />
+        </geometry>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://iiwa_7_r800_description/meshes/iiwa_7_r800/collision/link_2.stl" />
+        </geometry>
+      </collision>
+    </link>
+    <link name="${prefix}link_3">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://iiwa_7_r800_description/meshes/iiwa_7_r800/visual/link_3.dae" />
+        </geometry>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://iiwa_7_r800_description/meshes/iiwa_7_r800/collision/link_3.stl" />
+        </geometry>
+      </collision>
+    </link>
+    <link name="${prefix}link_4">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://iiwa_7_r800_description/meshes/iiwa_7_r800/visual/link_4.dae" />
+        </geometry>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://iiwa_7_r800_description/meshes/iiwa_7_r800/collision/link_4.stl" />
+        </geometry>
+      </collision>
+    </link>
+    <link name="${prefix}link_5">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://iiwa_7_r800_description/meshes/iiwa_7_r800/visual/link_5.dae" />
+        </geometry>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://iiwa_7_r800_description/meshes/iiwa_7_r800/collision/link_5.stl" />
+        </geometry>
+      </collision>
+    </link>
+    <link name="${prefix}link_6">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://iiwa_7_r800_description/meshes/iiwa_7_r800/visual/link_6.dae" />
+        </geometry>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://iiwa_7_r800_description/meshes/iiwa_7_r800/collision/link_6.stl" />
+        </geometry>
+      </collision>
+    </link>
+    <link name="${prefix}link_7">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://iiwa_7_r800_description/meshes/iiwa_7_r800/visual/link_7.dae" />
+        </geometry>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://iiwa_7_r800_description/meshes/iiwa_7_r800/collision/link_7.stl" />
+        </geometry>
+      </collision>
+    </link>
+    <!-- HEAD -->
+    <link name="${prefix}tool0">
+      <!-- <visual> -->
+      <!--   <origin xyz="0.04 0.01 0.01" rpy="1.57 0 -1.57" /> -->
+      <!--   <geometry> -->
+      <!--     <mesh filename="package://iiwa_7_r800_description/meshes/iiwa_7_r800/collision/polyhead.stl" /> -->
+      <!--   </geometry> -->
+      <!--   <material name="White"> -->
+      <!--     <color rgba="1.0 1.0 1.0 1.0"/> -->
+      <!--   </material> -->
+      <!-- </visual> -->
+      <collision>
+        <origin xyz="0.04 0.01 0.01" rpy="1.57 0 -1.57" />
+        <geometry>
+          <mesh filename="package://iiwa_7_r800_description/meshes/iiwa_7_r800/collision/polyhead.stl" />
+        </geometry>
+      </collision>
+    </link>
+    <!-- end of link list -->
+
+    <!-- joint list -->
+    <joint name="${prefix}joint_a1" type="revolute">
+      <origin xyz="0 0 -0.02" rpy="0 0 0" />
+      <parent link="${prefix}base_link" />
+      <child link="${prefix}link_1" />
+      <axis xyz="0 0 1" />
+      <limit lower="${-2.96706+limit_padding}" upper="${2.96706-limit_padding}" effort="0" velocity="0.7895" />
+      <safety_controller k_position="${k_position}" k_velocity="0" soft_lower_limit="${-2.96706+soft_limit}" soft_upper_limit="${2.96706-soft_limit}" />
+    </joint>
+    <joint name="${prefix}joint_a2" type="revolute">
+      <origin xyz="-0.00043624 0 0.36" rpy="0 0 0" />
+      <parent link="${prefix}link_1" />
+      <child link="${prefix}link_2" />
+      <axis xyz="0 1 0" />
+      <limit lower="${-2.0944+limit_padding}" upper="${2.0944-limit_padding}" effort="0" velocity="0.7895" />
+      <safety_controller k_position="${k_position}" k_velocity="0" soft_lower_limit="${-2.0944+soft_limit}" soft_upper_limit="${2.0944-soft_limit}" />
+    </joint>
+    <joint name="${prefix}joint_a3" type="revolute">
+      <origin xyz="0 0 -0.02" rpy="0 0 0" />
+      <parent link="${prefix}link_2" />
+      <child link="${prefix}link_3" />
+      <axis xyz="0 0 1" />
+      <limit lower="${-2.96706+limit_padding}" upper="${2.96706-limit_padding}" effort="0" velocity="0.9730" />
+      <safety_controller k_position="${k_position}" k_velocity="0" soft_lower_limit="${-2.96706+soft_limit}" soft_upper_limit="${2.96706-soft_limit}" />
+    </joint>
+    <joint name="${prefix}joint_a4" type="revolute">
+      <origin xyz="0.00043624 0 0.42" rpy="0 0 0" />
+      <parent link="${prefix}link_3" />
+      <child link="${prefix}link_4" />
+      <axis xyz="0 -1 0" />
+      <limit lower="${-2.0944+limit_padding}" upper="${2.0944-limit_padding}" effort="0" velocity="1.2162" />
+      <safety_controller k_position="${k_position}" k_velocity="0" soft_lower_limit="${-2.0944+soft_limit}" soft_upper_limit="${2.0944-soft_limit}" />
+    </joint>
+    <joint name="${prefix}joint_a5" type="revolute">
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <parent link="${prefix}link_4" />
+      <child link="${prefix}link_5" />
+      <axis xyz="0 0 1" />
+      <limit lower="${-2.96706+limit_padding}" upper="${2.96706-limit_padding}" effort="0" velocity="1.7143" />
+      <safety_controller k_position="${k_position}" k_velocity="0" soft_lower_limit="${-2.96706+soft_limit}" soft_upper_limit="${2.96706-soft_limit}" />
+    </joint>
+    <joint name="${prefix}joint_a6" type="revolute">
+      <origin xyz="0 0 0.4" rpy="0 0 0" />
+      <parent link="${prefix}link_5" />
+      <child link="${prefix}link_6" />
+      <axis xyz="0 1 0" />
+      <limit lower="${-2.0944+limit_padding}" upper="${2.0944-limit_padding}" effort="0" velocity="2.6471" />
+      <safety_controller k_position="${k_position}" k_velocity="0" soft_lower_limit="${-2.0944+soft_limit}" soft_upper_limit="${2.0944-soft_limit}" />
+    </joint>
+    <joint name="${prefix}joint_a7" type="revolute">
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <parent link="${prefix}link_6" />
+      <child link="${prefix}link_7" />
+      <axis xyz="0 0 1" />
+      <limit lower="${-3.0543+limit_padding}" upper="${3.0543-limit_padding}" effort="0" velocity="3.3962" />
+      <safety_controller k_position="${k_position}" k_velocity="0" soft_lower_limit="${-3.0543+soft_limit}" soft_upper_limit="${3.0543-soft_limit}" />
+    </joint>
+    <joint name="${prefix}joint_a7-tool0" type="fixed">
+      <origin xyz="0 0 0.126" rpy="0 0 0" />
+      <parent link="${prefix}link_7" />
+      <child link="${prefix}tool0" />
+      <axis xyz="0 0 0" />
+    </joint>
+    <!-- end of joint list -->
+
+    <!-- Dummy end effector joint to allow grasping pipeline to work -->
+    <link name="${prefix}dummy_ee_link">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+      <sphere radius="0.001"/>
+        </geometry>
+      </visual>
+    </link>
+    <joint name="${prefix}dummy_ee_joint" type="revolute">
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <axis xyz="1 0 0" />
+      <limit lower="${-1+limit_padding}" upper="${1-limit_padding}" effort="0" velocity="1" />
+      <parent link="${prefix}link_7"/>
+      <child link="${prefix}dummy_ee_link"/>
+    </joint>
+
+    <!-- ROS base_link to KUKA $ROBROOT coordinate system transform -->
+    <!-- <link name="${prefix}base" /> -->
+    <!-- <joint name="${prefix}base_link-base" type="fixed"> -->
+    <!--   <origin xyz="0 0 0" rpy="0 0 0"/> -->
+    <!--   <parent link="${prefix}base_link"/> -->
+    <!--   <child link="${prefix}base"/> -->
+    <!-- </joint> -->
+  </xacro:macro>
+</robot>

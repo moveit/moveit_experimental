@@ -1,0 +1,201 @@
+# Reflexxes-based trajectory controller
+#reflexxes_trajectory_controller:
+cartesian_controller:
+   type: reflexxes_vel_controller/ReflexxesController
+   joints:
+     - joint_a1
+     - joint_a2
+     - joint_a3
+     - joint_a4
+     - joint_a5
+     - joint_a6
+     - joint_a7
+   vel_scaling_factor: 1.0 # percent of URDF velocity to actually move at
+   acc_scaling_factor: 2.0 # Scaling factor of acc from acceleration limit read from rosparam/joint_limits.yaml
+   jerk_scaling_factor: 10 #50 # Scaling factor of jer from velocity limit read from rosparam/joint_limits.yaml
+   curr_position_threshold: 0.01 # Threshold at which the actual robot has veered too far from what reflexxes is tracking, at which point reflexxes must be updated
+
+   position_error_threshold: 0.05 # when the position is close enough for the next point to be processed
+   max_p_gain: 8 # max proportional gain allowed for the PID controller. will use smaller value if close to goal
+   min_p_gain: 2 # min proporitonal gain allowed for the PID controller. if the p-gain goes to small, the goal will never converge
+   i_gain: 0.0 # integral gain TODO remove
+   soft_trajectory_limit: 10 # at which point (int) to start reducing p_gain towards end of trajectory
+
+   state_publish_rate: 300 # Frequency (in Hz) at which the controller state is published.
+   cycle_hz: 300 # hz
+   cycle_time_error_threshold: 0.02 # use this value when in simulation
+   #cycle_time_error_threshold: 0.00001 # use this value when connected to real hardware
+   run_trajectory_test: false # simple trajectory to test
+   sync_time_threshold: 0.2
+   robot_description: robot_description
+   debug:
+     update_rate: false # display the time it takes to do one control cycle
+     avg_cycle_time: false # display the average time between control cycles
+     show_calcs_joint: 30 # which joint to ouput calculation debug info, numbers larger than 6 (max joint num) indicate none
+   # Cartesian planner using IK solving in separate, non-realtime thread
+   cart_path_planner:
+     vel_scaling_factor: 1.0 # what percent of the max velocity to move at
+     ik_consistency_limit: 3.14 # max distance allowed between the solution and the seed state
+     #ik_cart_max_step: 0.05 # Resolution of trajectory, the maximum distance in Cartesian space between consecutive points on the resulting path
+     ik_cart_max_step: 0.1 # Resolution of trajectory, the maximum distance in Cartesian space between consecutive points on the resulting path
+     ik_cart_jump_threshold: 4 # Threshold for preventing consequtive joint values from 'jumping' by a large amount in joint space
+     #traj_start_point_time_thresh: 0.05 # How long to wait before first point starts in time in trajectories
+     pose_equal_threshold: 0.00001 # Ignore cartesian commands that are less than this value in similarity
+     use_collision_checking: true # enable the MoveIt! planning scene to prevent hitting things
+     required_num_collsion_objects: 3 # ensure that the planning scene has properly synced before allowing the robot to move
+     time_param_iterations: 1000 # maximum number of iterations to find time parabolic solution
+     visualization_rate: 30 # hz
+     average_plan_time: 0.01 # how far into the future to start planning from in the quintic spline plan
+     debug:
+       command_rate: true # measure time it takes to calculate IK cartesian paths
+       generated_traj_rate: false # measure freq of commands in our created joint trajetories
+       show_time_parameterization: false # output to consule the results of the iterative algorithm
+       show_trajectory: false # output to console the entire generated trajectory
+       save_generated_trajectory: true # save to file
+       save_traj_to_file_path: /home/dave/ros/current/iiwa_trajectory_data/
+   # MoveIt Boilerplate Base Functionality
+   moveit_base:
+     joint_state_topic: /iiwa_7_r800/joint_states # location to recieve updates of the robot's pose
+     joint_model_group: arm # the main planning group to control
+     planning_scene_topic: /iiwa_7_r800/planning_scene  # topic for communicating the collision obj in the env with other nodes
+     rviz:
+       markers_topic: /moveit_teleop/markers
+       robot_state_topic: /moveit_teleop/robot_state
+       trajectory_topic: /moveit_teleop/display_trajectory
+
+# Custom trajectory controller adapted from ros_controllers/joint_trajectory_controller
+DISBALED_cartesian_controller:
+   type: position_controllers/CartesianController
+   joints:
+     - joint_a1
+     - joint_a2
+     - joint_a3
+     - joint_a4
+     - joint_a5
+     - joint_a6
+     - joint_a7
+   vel_scaling_factor: 1.0 # percent of URDF velocity to actually move at
+   state_publish_rate: 100 # Frequency (in Hz) at which the controller state is published.
+   cycle_hz: 300 # hz
+   cycle_time_error_threshold: 0.00001
+   stop_trajectory_duration: 0.25 # Amount of time to decelerate when commanded to stop.
+   debug:
+     update_rate: false # display the time it takes to do one control cycle
+     avg_cycle_time: false # display the average time between control cycles
+   # Cartesian planner using IK solving in separate, non-realtime thread
+   cart_path_planner:
+     vel_scaling_factor: 1.0 # what percent of the max velocity to move at
+     ik_consistency_limit: 3.14 # max distance allowed between the solution and the seed state
+     ik_cart_max_step: 0.1 # Resolution of trajectory, the maximum distance in Cartesian space between consecutive points on the resulting path
+     ik_cart_jump_threshold: 4 # Threshold for preventing consequtive joint values from 'jumping' by a large amount in joint space
+     pose_equal_threshold: 0.00001 # Ignore cartesian commands that are less than this value in similarity
+     use_collision_checking: true # enable the MoveIt! planning scene to prevent hitting things
+     time_param_iterations: 1000 # maximum number of iterations to find time parabolic solution. 300 is plenty...
+     visualization_rate: 30 # hz how often to publish data to Rviz in separate thread
+     average_plan_time: 0.01 # how far into the future to start planning from in the quintic spline plan
+     debug:
+       command_rate: true # measure time it takes to calculate IK cartesian paths
+       generated_traj_rate: false # measure freq of commands in our created joint trajetories
+       show_time_parameterization: false # output to consule the results of the iterative algorithm
+       show_trajectory: false # output to console the entire generated trajectory
+       save_generated_trajectory: false # save to file
+       save_traj_to_file_path: /home/dave/ros/current/iiwa_trajectory_data/
+   # MoveIt Boilerplate Base Functionality
+   moveit_base:
+      joint_state_topic: /iiwa_7_r800/joint_states # location to recieve updates of the robot's pose
+      joint_model_group: arm # the main planning group to control
+      planning_scene_topic: /iiwa_7_r800/planning_scene  # topic for communicating the collision obj in the env with other nodes
+
+# Settings for IIWA ros_control hardware interface
+iiwa_hw_interface:
+   monitor_control_freq: 300 # only for verifiying rate is correct (we are not lagging)
+
+# Simulation settings
+generic_hw_control_loop:
+  loop_hz: 300
+  cycle_time_error_threshold: 0.02
+
+# MoveIt-specific simulation settings
+moveit_sim_hw_interface:
+  joint_model_group: arm
+  joint_model_group_pose: home
+
+# Settings for generic ros_control hardware interface
+hardware_interface:
+   joints:
+      - joint_a1
+      - joint_a2
+      - joint_a3
+      - joint_a4
+      - joint_a5
+      - joint_a6
+      - joint_a7
+      - dummy_ee_joint
+
+# Publish all joint states ----------------------------------
+joint_state_controller:
+   type:         joint_state_controller/JointStateController
+   publish_rate: 100
+
+# Position Controllers ---------------------------------------
+joints_position_controller:
+   type: position_controllers/JointGroupPositionController
+   joints:
+     - joint_a1
+     - joint_a2
+     - joint_a3
+     - joint_a4
+     - joint_a5
+     - joint_a6
+     - joint_a7
+     #pid: {p: 1.0, i: 0.0, d: 0.0}
+
+# End Effector -----------------------------------------------
+joint_position_controller:
+   type: position_controllers/JointPositionController
+   joint: dummy_ee_joint # TODO(davetcoleman) remove this joint and controller
+
+# Position Joint Trajectory Controller -------------------------------
+# For detailed explanations of parameter see http://wiki.ros.org/joint_trajectory_controller
+position_trajectory_controller:
+   type: position_controllers/JointTrajectoryController
+   joints:
+      - joint_a1
+      - joint_a2
+      - joint_a3
+      - joint_a4
+      - joint_a5
+      - joint_a6
+      - joint_a7
+   constraints:
+      goal_time: 1.0 # If the timestamp of the goal trajectory point is t, then following the trajectory succeeds if it reaches the goal within t +/- goal_time, and aborts otherwise.
+      stopped_velocity_tolerance: 0.01 # Velocity to be considered approximately equal to zero
+      joint_a1:
+          trajectory: 0.60 # Position tolerance for a particular joint throughout the trajectory. If the joint position ever falls outside trajectory_position +/- tolerance, then the trajectory aborts.
+          goal:       0.15 # Position tolerance for a particular joint to reach the goal. When the joint is within goal_position +/- goal_tolerance, than the trajectory can succeed.
+      joint_a2:
+          trajectory: 0.60
+          goal:       0.15
+      joint_a3:
+          trajectory: 0.60
+          goal:       0.15
+      joint_a4:
+          trajectory: 0.60
+          goal:       0.15
+      joint_a5:
+          trajectory: 0.60
+          goal:       0.15
+      joint_a6:
+          trajectory: 0.60
+          goal:       0.15
+      joint_a7:
+          trajectory: 0.60
+          goal:       0.15
+
+   #gains: # Key value pairs specifying a PID controller. This is only required by the effort interface variant
+   #  joint1: {p: 2.0,  i: 0.0, d: 0.01, i_clamp: 1}
+   #  joint2: {p: 2.0,  i: 0.0, d: 0.01, i_clamp: 1}
+
+   #stop_trajectory_duration: 0 # When starting the controller or canceling a trajectory, position hold mode is entered. This parameter specifies the time it takes to bring the current state (position and velocity) to a stop. Its value can be greater or equal than zero.
+   state_publish_rate:  200 # Frequency (in Hz) at which the controller state is published.
+   #action_monitor_rate: 20 # Frequency (in Hz) at which the action goal status is monitored. This is an advanced parameter that should not require changing.

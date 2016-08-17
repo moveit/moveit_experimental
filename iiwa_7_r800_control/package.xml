@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<package>
+  <name>iiwa_7_r800_control</name>
+  <version>0.0.1</version>
+  <description>Base communication with KUKA IIWA 7 R800 using the Fast Robot Interface over UDP with ros_control</description>
+
+  <maintainer email="davetcoleman@gmail.com">Dave Coleman</maintainer>
+
+  <license>Proprietary</license>
+
+  <url type="website">https://dav.ee/</url>
+
+  <author email="davetcoleman@gmail.com">Dave Coleman</author>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <build_depend>roscpp</build_depend>
+  <build_depend>ros_control_boilerplate</build_depend>
+  <build_depend>rosparam_shortcuts</build_depend>
+  <build_depend>roslint</build_depend>
+  <build_depend>moveit_dashboard</build_depend>
+
+  <run_depend>roscpp</run_depend>
+  <run_depend>ros_control_boilerplate</run_depend>
+  <run_depend>rosparam_shortcuts</run_depend>
+  <run_depend>iiwa_7_r800_moveit_config</run_depend>
+  <run_depend>moveit_dashboard</run_depend>
+  <run_depend>moveit_sim_controller</run_depend>
+
+</package>

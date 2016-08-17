@@ -1,0 +1,13 @@
+<launch>
+
+    <node name="iiwa_7_r800_controller_to_csv" pkg="ros_control_boilerplate"
+      type="controller_to_csv_main" output="screen" args="
+       -csv_path=/home/dave/ros/current/iiwa_trajectory_data/recorded_trajectory_0.csv
+       -topic='/iiwa_7_r800/cartesian_controller/state'">
+      <rosparam>
+        controller_to_csv:
+          record_hz: 0
+      </rosparam>
+    </node>
+
+</launch>

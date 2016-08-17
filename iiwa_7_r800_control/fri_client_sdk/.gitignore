@@ -1,0 +1,8 @@
+fri_client_sdk/bin
+obj
+*.o
+*.a
+fri_client_sdk/example/LBRClientTemplate/LBRClientTemplate
+fri_client_sdk/example/LBRJointSineOverlay/LBRJointSineOverlay
+fri_client_sdk/example/LBRTorqueSineOverlay/LBRTorqueSineOverlay
+fri_client_sdk/example/LBRWrenchSineOverlay/LBRWrenchSineOverlay

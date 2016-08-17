@@ -1,0 +1,53 @@
+# Custom Trajectory Controller ---------------------------------------
+reflexxes_trajectory_controller:
+   type: reflexxes_controller/ReflexxesController
+   joints:
+     - joint_a1
+     - joint_a2
+     - joint_a3
+     - joint_a4
+     - joint_a5
+     - joint_a6
+     - joint_a7
+   vel_scaling_factor: 1.0 # percent of URDF velocity to actually move at
+   acc_scaling_factor: 1.1 # Scaling factor of acc from velocity limit read from URDF
+   jerk_scaling_factor: 10000000 # Scaling factor of jer from velocity limit read from URDF
+   #vel_scaling_factor: 1.0 # percent of URDF velocity to actually move at
+   #acc_scaling_factor: 0.5 # Scaling factor of acceleration from velocity limit read from URDF
+   #jerk_scaling_factor: 0.5 # Scaling factor of jerk from velocity limit read from URDF
+   curr_position_threshold: 0.01 # When to update the current position that reflexxes is tracking
+   state_publish_rate: 100 # Frequency (in Hz) at which the controller state is published.
+   cycle_hz: 300 # hz
+   cycle_time_error_threshold: 0.02
+   #cycle_time_error_threshold: 0.00001
+   #average_cart_plan_time: 0.01 # how far into the future to start planning from in the reflexxes plan
+   average_cart_plan_time: 0.01 # how far into the future to start planning from in the reflexxes plan
+   run_trajectory_test: false # simple trajectory to test
+   sync_time_threshold: 0.2
+   debug:
+     update_rate: false # display the time it takes to do one control cycle
+     avg_cycle_time: false # display the average time between control cycles
+   # Cartesian Planner --------------------------------------
+   cart_path_planner:
+     cart_command_topic: /iiwa_7_r800/reflexxes_trajectory_controller/cartesian_command
+     vel_scaling_factor: 1.0 # what percent of the max velocity to move at
+     ik_consistency_limit: 3.14
+     ik_cart_max_step: 0.05 # Resolution of trajectory, the maximum distance in Cartesian space between consecutive points on the resulting path
+     #ik_cart_max_step: 0.1 # Resolution of trajectory, the maximum distance in Cartesian space between consecutive points on the resulting path
+     ik_cart_jump_threshold: 4 # Threshold for preventing consequtive joint values from 'jumping' by a large amount in joint space
+     traj_start_point_time_thresh: 0.05 # How long to wait before first point starts in time in trajectories
+     pose_equal_threshold: 0.000001
+     use_collision_checking: false
+     collision_check_skip_every: 1 # how many collision checks to skip
+     time_param_iterations: 1000 # maximum number of iterations to find time parabolic solution
+     visualization_rate: 30 # hz
+     debug:
+       command_rate: true # measure time it takes to calculate IK cartesian paths
+       generated_traj_rate: false # measure freq of commands in our created joint trajetories
+       show_trajectory: true # output to console the entire generated trajectory
+       save_generated_trajectory: true # save to file
+       save_traj_to_file_path: /home/dave/ros/current/iiwa_trajectory_data/
+   # MoveIt Boilerplate ------------------------------------
+   moveit_base:
+     joint_state_topic: /iiwa_7_r800/joint_states
+     joint_model_group: arm

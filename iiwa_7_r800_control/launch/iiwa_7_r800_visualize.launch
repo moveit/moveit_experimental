@@ -1,0 +1,12 @@
+<launch>
+
+  <!-- Load the URDF, SRDF and other .yaml configuration files on the param server -->
+  <include file="$(find iiwa_7_r800_moveit_config)/launch/planning_context.launch">
+    <arg name="load_robot_description" value="true"/>
+    <arg name="robot_description" value="iiwa_7_r800/robot_description"/>
+  </include>
+
+  <!-- Show in Rviz  -->
+  <node name="$(anon rviz)" pkg="rviz" type="rviz" args="-d $(find iiwa_7_r800_description)/launch/iiwa_7_r800.rviz"/>
+
+</launch>

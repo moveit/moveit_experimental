@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='ASCII'?>
+<package>
+  <name>moveit_teleop</name>
+
+  <version>0.1.0</version>
+
+  <description>Teleoperation capabilities for controlling a robot in soft realtime with MoveIt!</description>
+
+  <maintainer email="davetcoleman@gmail.com">Dave Coleman</maintainer>
+
+  <license>Proprietary</license>
+
+  <url type="website">https://dav.ee/</url>
+
+  <author email="davetcoleman@gmail.com">Dave Coleman</author>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <build_depend>moveit_boilerplate</build_depend>
+  <build_depend>roslint</build_depend>
+  <build_depend>dashboard_msgs</build_depend>
+
+  <run_depend>moveit_boilerplate</run_depend>
+
+</package>

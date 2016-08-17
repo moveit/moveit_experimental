@@ -1,0 +1,11 @@
+<launch>
+
+  <!-- GDB functionality -->
+  <arg name="debug" default="false" />
+
+  <include file="$(find iiwa_7_r800_control)/launch/iiwa_7_r800_common.launch">
+    <arg name="simulation" value="false"/>
+    <arg name="debug" default="$(arg debug)"/>
+  </include>
+
+</launch>

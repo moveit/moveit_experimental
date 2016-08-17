@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<launch>
+
+  <!-- GDB functionality -->
+  <arg name="debug" default="false" />
+
+  <include file="$(find iiwa_7_r800_control)/launch/iiwa_7_r800_common.launch">
+    <arg name="simulation" value="true"/>
+    <arg name="debug" default="$(arg debug)"/>
+  </include>
+
+</launch>

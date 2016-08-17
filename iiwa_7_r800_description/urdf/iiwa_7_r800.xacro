@@ -1,0 +1,5 @@
+<?xml version="1.0" ?>
+<robot name="iiwa_7_r800" xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:include filename="$(find iiwa_7_r800_description)/urdf/iiwa_7_r800_macro.xacro"/>
+  <xacro:kuka_iiwa_7_r800 prefix=""/>
+</robot>
